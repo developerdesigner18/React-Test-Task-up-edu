@@ -8,7 +8,7 @@ import {
 } from "../utils/localStorageManager";
 
 const ProjectDetail = () => {
-  const favoriteProjects = ["Project A", "Project B"];
+  const favoriteProjects = ["Product A", "Product B"];
   const { id } = useParams();
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -19,7 +19,7 @@ const ProjectDetail = () => {
     if (!products) return;
 
     const index = products.findIndex((product) => product.id == values.id);
-    console.log({ index });
+
     if (index === undefined || index == -1) return;
 
     const product = products[index];
@@ -66,27 +66,22 @@ const ProjectDetail = () => {
   }, [id, form]);
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-3">
-          <Card>
-            <div className="pt-6">
-              <h2 className="text-lg font-semibold mb-4">Favorite Projects</h2>
-              <ul className="space-y-2">
-                {favoriteProjects.map((project) => (
-                  <li
-                    key={project}
-                    className="text-blue-600 hover:text-blue-800 cursor-pointer"
-                  >
-                    • {project}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Card>
+    <div className="flex">
+      <div className="fixed border-r-[3px] border-gray-200 top-0 bottom-0 left-0 h-svh w-[250px]">
+        <div className="p-4 pt-16 h-full">
+          <h2 className="text-xl font-semibold mb-4">Favorite Projects</h2>
+          <ul className="flex flex-col pl-10 gap-2 list-disc">
+            {favoriteProjects.map((project) => (
+              <li key={project} className="text-black text-lg cursor-pointer">
+                {project}
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
 
-        <div className="col-span-9">
+      <div className="ml-auto w-[calc(100%-250px)]">
+        <div className="p-10 pt-16">
           <Card title="Project Detail Page" className="shadow">
             <Form form={form} layout="vertical" onFinish={onFinish}>
               <Form.Item label="Product ID" name="id" className="mb-4">
